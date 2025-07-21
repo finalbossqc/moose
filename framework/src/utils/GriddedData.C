@@ -11,6 +11,7 @@
 #include "MooseUtils.h"
 #include <fstream>
 #include <algorithm>
+#include <iostream>
 
 /**
  * Creates a GriddedData object by reading info from file_name
@@ -133,25 +134,25 @@ GriddedData::parse(unsigned int & dim,
   {
     // look for AXIS keywords
     reading_grid_data = false;
-    if (line.compare("AXIS X") == 0)
+    if (line.find("AXIS X") != std::string::npos)
     {
       dim += 1;
       reading_grid_data = true;
       axes.push_back(0);
     }
-    else if (line.compare("AXIS Y") == 0)
+    else if (line.find("AXIS Y") != std::string::npos)
     {
       dim += 1;
       reading_grid_data = true;
       axes.push_back(1);
     }
-    else if (line.compare("AXIS Z") == 0)
+    else if (line.find("AXIS Z") != std::string::npos)
     {
       dim += 1;
       reading_grid_data = true;
       axes.push_back(2);
     }
-    else if (line.compare("AXIS T") == 0)
+    else if (line.find("AXIS T") != std::string::npos)
     {
       dim += 1;
       reading_grid_data = true;
@@ -173,7 +174,7 @@ GriddedData::parse(unsigned int & dim,
       splitToRealVec(line, f);
 
     // look for DATA keyword
-    if (line.compare("DATA") == 0)
+    if (line.find("DATA") != std::string::npos)
       reading_value_data = true;
 
     // ignore any other lines - if we get here probably the data file is corrupt
