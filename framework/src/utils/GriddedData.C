@@ -11,7 +11,6 @@
 #include "MooseUtils.h"
 #include <fstream>
 #include <algorithm>
-#include <iostream>
 
 /**
  * Creates a GriddedData object by reading info from file_name
